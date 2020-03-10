@@ -382,7 +382,7 @@ public void R_MusicChart(){		//최신곡 차트 보기
 	
 	for (int i = 0; i < musicChart.length; i++) {
 		MusicVO music = musicChart[i];
-		System.out.println((i+1) + "위" + "\t" + music.getM_name() + "\t" + music.getM_singer() + "\t" + music.getM_lyrics() + "\t" +
+		System.out.println((i+1) + "\t" + music.getM_name() + "\t" + music.getM_singer() + "\t" + music.getM_lyrics() + "\t" +
 		music.getM_composition() + "\t" + music.getM_genre() + "\t" + music.getM_date() + "\t" + music.getM_count());
 	}		
 }
