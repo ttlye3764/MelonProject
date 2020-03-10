@@ -28,7 +28,7 @@ public class M_BoardService {
 	
 	//작성
 	public void insertM_Board(){
-		SimpleDateFormat format = new SimpleDateFormat("yyyy년mm월dd일 hh시mm분");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy년MM월dd일 hh시mm분");
 		Date time = new Date();
 		
 		

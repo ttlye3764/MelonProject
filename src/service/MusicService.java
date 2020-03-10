@@ -336,7 +336,7 @@ public void MusicChart(){		//인기 차트 보기
 	System.out.println("-----------------------인기  차트-----------------------");
 	System.out.println("등록번호\t노래제목\t가수\t작사\t작곡\t장르\t음원날짜\t들은횟수\t");
 	
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < musicChart.length; i++) {
 		MusicVO music = musicChart[i];
 		System.out.println((i+1) + "위" + "\t" + music.getM_name() + "\t" + music.getM_singer() + "\t" + music.getM_lyrics() + "\t" +
 		music.getM_composition() + "\t" + music.getM_genre() + "\t" + music.getM_date() + "\t" + music.getM_count());
@@ -380,7 +380,7 @@ public void R_MusicChart(){		//최신곡 차트 보기
 	System.out.println("-----------------------최신곡  차트-----------------------");
 	System.out.println("등록번호\t노래제목\t가수\t작사\t작곡\t장르\t음원날짜\t들은횟수\t");
 	
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < musicChart.length; i++) {
 		MusicVO music = musicChart[i];
 		System.out.println((i+1) + "위" + "\t" + music.getM_name() + "\t" + music.getM_singer() + "\t" + music.getM_lyrics() + "\t" +
 		music.getM_composition() + "\t" + music.getM_genre() + "\t" + music.getM_date() + "\t" + music.getM_count());
