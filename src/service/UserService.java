@@ -8,6 +8,7 @@ import java.util.Scanner;
 import vo.UserVO;
 import vo.ticketVO;
 import controller.UserController;
+import dao.TicketDao;
 import dao.UserDao;
 import data.Session;
 //1234
@@ -26,6 +27,7 @@ public class UserService {
 	}
 
 	UserDao userDao = UserDao.getInstance();
+	TicketDao ticketDao = TicketDao.getInstance();
 
 	// 회원가입
 	public void join() {
