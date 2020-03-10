@@ -1,14 +1,14 @@
 package service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.Scanner;
 
+import vo.M_BoardVO;
 import dao.M_BoardDao;
 import data.Database;
 import data.Session;
-import vo.M_BoardVO;
-import vo.UserVO;
 
 public class M_BoardService {
 	
@@ -28,6 +28,9 @@ public class M_BoardService {
 	
 	//작성
 	public void insertM_Board(){
+		SimpleDateFormat format = new SimpleDateFormat("yyyy년mm월dd일 hh시mm분");
+		Date time = new Date();
+		
 		
 		M_BoardVO board = new M_BoardVO();
 		
@@ -38,8 +41,7 @@ public class M_BoardService {
         String content = scan.nextLine();
         System.out.println("게시글 번호를 입력해주세요");
         int number = Integer.parseInt(scan.nextLine());
-        System.out.println("날짜를 적어주세요");
-        String date = scan.nextLine();
+        
         
         System.out.println("게시글이 등록되었습니다");
         
@@ -50,7 +52,7 @@ public class M_BoardService {
 		board.setU_id(Session.LoginUser.getU_id());
 		board.setM_b_content(content);
 		board.setM_b_number(number);
-		board.setM_b_date(date);
+		board.setM_b_date(format.format(time));
 		
 		
 		m_boardDao.insertboard(board);
