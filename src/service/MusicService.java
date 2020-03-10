@@ -36,7 +36,7 @@ public class MusicService {
 		MusicVO music = new MusicVO();
 		
 		System.out.print("노래 등록 번호 : ");
-		int number= Integer.parseInt(s.nextLine());
+		int number= Integer.parseInt(s.nextLine()); 
 		System.out.print("노래 제목 : ");
 		String name = s.nextLine();
 		System.out.print("가수 : ");
