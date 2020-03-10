@@ -10,8 +10,6 @@ import vo.MusicVO;
 import vo.R_playListVO;
 import vo.UserVO;
 import vo.PlayListVO;
-//git testdddddd
-//git test 용춘이 테스트
 public class MusicDao {
 
 	private static MusicDao instance;
