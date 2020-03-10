@@ -37,17 +37,17 @@ public class TicketDao {
 
 	}
 	
-	/*public ticketVO selectticket(HashMap<String, String> param) {
+	public ticketVO selectticket(HashMap<String, Object> param) {
 		ticketVO rtnTicket = null;
 		for (int i = 0; i < database.tb_ticket.size(); i++) {
 			ticketVO ticket = database.tb_ticket.get(i);
 			boolean flag  = true;
 			for(String key : param.keySet()){
-				String value = param.get(key);
+				Object value = param.get(key);
 				if(key.equals("ID")){
 					if(!ticket.getU_name().equals(value)) flag = false;
 				}else if(key.equals("PASSWORD")){
-					if(!ticket.getT_number().equals(value)) flag = false;
+					if((Integer)ticket.getT_number() != value) flag = false;
 				}else if(key.equals("NAME")){
 					if(!ticket.getT_buy_date().equals(value)) flag = false;
 				}
@@ -55,7 +55,7 @@ public class TicketDao {
 			 if(flag) rtnTicket = ticket;
 		}
 	return rtnTicket;
-}*/
+}
 	public ArrayList<ticketVO> selectticket() {
 		
 		return database.tb_ticket;

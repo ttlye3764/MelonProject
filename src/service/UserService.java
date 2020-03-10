@@ -1,5 +1,6 @@
 package service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -204,33 +205,37 @@ public class UserService {
 		Scanner s = new Scanner(System.in);
 		UserVO user = Session.LoginUser;
 		ticketVO Ticket = new ticketVO();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy년mm월dd일 hh시mm분");
 		Date today = new Date(); // 날짜를 표현하는 클래스,현재 날짜가 저장
 		int menu = 0;
-		int ticket = 0;
+		int ticket = user.getU_ticket();
 		String name = user.getU_name();
 		do {
 			System.out.println("--------------이용권 구매 여부-----------------");
 			System.out.println("이용권 갯수 : " + user.getU_ticket());
-			System.out.println("이용권 구매 날짜 : " + Ticket.getT_buy_date());
+			System.out.println("이용권 구매 날짜 : " + Ticket.getT_buy_date() + Ticket.getT_buy_date() );
 			System.out.println("데이터 베이스에 저장된 이용권 갯수 : " + Ticket.getT_number());
 			System.out.println("데이터 베이스에 저장된 닉네임 : " + Ticket.getU_name());
 			System.out.println("\n" + "1. 이용권 구매 2.이전 메뉴");
 			menu = Integer.parseInt(s.nextLine());
+			
 			switch (menu) {
 			case 1:
 				System.out.println("이용권을 구매 했습니다.");
 				ticket += 20;
-				UserVO user1 = new UserVO();
 				user.setU_ticket(ticket);
 				Ticket.setT_buy_date(today);
 				Ticket.setU_name(name);
 				Ticket.setT_number(ticket);
+				ticketDao.insertTicket(Ticket);
 				break;
 			case 2:
 				userInfo();
 				break;
 			}
-		} while (menu != 0);
+		}while(menu != 0);
 	}
-
 }
+
+
+
