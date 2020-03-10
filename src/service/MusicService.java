@@ -64,6 +64,21 @@ public class MusicService {
 		musicDao.insertMusic(music); 			
 	}
 	
+	public MusicVO searchNumberMusic(int number){
+		MusicDao musicDao = MusicDao.getInstance();
+		ArrayList<MusicVO> musicList = musicDao.MusicList();
+		
+		MusicVO rtnMusic = null;
+		
+		for(int i = 0; i< musicList.size();i++){
+			if(musicList.get(i).getM_number() == number){
+				rtnMusic = musicList.get(i);
+				break;
+			}
+		}
+		return rtnMusic;
+	}
+	
 	
 	public void searchMusic(){					//음악 찾기 및 플레이 리스트에 추가하는부분
 		Scanner s = new Scanner(System.in);

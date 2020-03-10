@@ -76,6 +76,8 @@ public class UserController {
 
 	void chart() {
 		MusicService musicService = MusicService.getInstance();
+		AdminController adminController = AdminController.getInstance();
+		Controller controller = Controller.getInstance();
 		int menu;
 		Scanner scan = new Scanner(System.in);
 		do {
@@ -102,7 +104,13 @@ public class UserController {
 				musicService.Genre_MusicChart();
 				break;
 			case 4:
-				userLoginMenu();
+				if(Session.LoginUser.getU_id().equals("admin")){
+					adminController.musicMange();
+				}else if(Session.LoginUser.getU_id()== null){
+					controller.start();
+				}else{
+					userLoginMenu();
+				}
 				break;
 			case 0:
 				System.out.println("프로그램 종료");
@@ -142,7 +150,7 @@ public class UserController {
 		UserController usercontroller = UserController.getInstance();
 		int menu;
 		do {
-			System.out.println("1. 노래추천 게시판 보기  2.노래추천 게시판 글 쓰기  3. 노래추천 게시판 수정 4.이전 메뉴로 가기   0.프로그램 종료");
+			System.out.println("1.게시판 보기  2.게시판 글 쓰기  3.게시판 수정  4.게시판 삭제  5.이전 메뉴로 가기   0.프로그램 종료");
 			menu = Integer.parseInt(scan.nextLine());
 
 			switch (menu) {
@@ -158,7 +166,11 @@ public class UserController {
 				//노래추천 게시판 수정
 				m_boardService.modifyM_Board();
 				break;
-			case 4:
+			case 4 :
+				//노래추천 게시판 삭제
+				m_boardService.deleteM_Board();
+				break;
+			case 5:
 				usercontroller.userLoginMenu();
 				break;
 			case 0:

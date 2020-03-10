@@ -56,7 +56,7 @@ public class Database {
 		m_board.setM_b_date("2020-03-09");
 		m_board.setU_id("확인용");
 		m_board.setM_b_number(1);
-		m_board.setM_number(5); //입력값을 받아서 입력값에 해당하는 노래게시판 번호
+		m_board.setM_number(1); //입력값을 받아서 입력값에 해당하는 노래게시판 번호
 		tb_m_board.add(m_board);
 		
 		O_BoardVO o_board = new O_BoardVO();

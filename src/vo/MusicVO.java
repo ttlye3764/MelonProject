@@ -20,6 +20,7 @@ public class MusicVO {
 	}
 	public void setM_lyrics(String m_lyrics) {
 		this.m_lyrics = m_lyrics;
+		
 	}
 	public String getM_composition() {
 		return m_composition;
