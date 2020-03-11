@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import service.M_BoardService;
 import service.MusicService;
+import service.TicketService;
 import service.UserService;
 import vo.UserVO;
 import data.Session;
@@ -24,7 +25,6 @@ public class UserController {
 
 	// 유저 로그인 메뉴
 	public void userLoginMenu() {
-		UserService userService = UserService.getInstance();
 		MusicService musicService = MusicService.getInstance();
 		Controller controller = Controller.getInstance();
 		Scanner scan = new Scanner(System.in);
@@ -57,7 +57,7 @@ public class UserController {
 				break;
 			case 4:
 				// 내 정보 메소드 호출
-				userService.userInfo();
+				userInfo();
 				break;
 			case 5:
 				// 노래추천 게시판 메소드 호출
@@ -192,4 +192,83 @@ public class UserController {
 			}
 		} while (menu != 0);
 	}
+	
+	public void userInfo() {
+		Scanner s = new Scanner(System.in);
+		UserController userController = UserController.getInstance();
+		UserService userService = UserService.getInstance();
+		TicketService ticketService = TicketService.getinstace();
+		
+		UserVO user = Session.LoginUser;
+		 
+		
+		
+		int menu;
+		
+		do {
+			System.out.println("--------------내 정보-----------------");
+			System.out.println(" 내 아이디 : " + user.getU_id()); // 세션에 있는 아이디를 가지고
+																// 온다.
+			System.out.println(" 내 닉네임 : " + user.getU_n_name()); // 세션에 있는 닉네임을 가져온다.
+			
+			System.out.println(" 총 구매한 이용권 수 : ");
+			ticketService.userBuyTicket(user.getU_id());
+			
+			System.out.println(" 현재 보유중인 이용권 수 : " );
+			ticketService.userTicketAmount(user.getU_id());
+			
+			System.out.println("이용권 산 날짜 : ");
+			ticketService.userTicketDate(user.getU_id());
+			
+			System.out.println(" 1. 이용권 구매");
+			System.out.println(" 2. 비밀번호 변경");
+			System.out.println(" 3. 닉네임 변경");
+			System.out.println(" 4. 회원 탈퇴");
+			System.out.println(" 5. 이전 메뉴");
+			System.out.println("-------------------------------------");
+			menu = Integer.parseInt(s.nextLine());
+			switch (menu) {
+			case 1:
+				ticketService.buyTicket();
+				break;
+			case 2:
+				userService.PWchange();
+				break;
+			case 3:
+				userService.NMchange();
+				break;
+			case 4:
+				userService.userDelete();
+				break;
+			case 5:
+				userController.userLoginMenu();
+				break;
+			case 0:
+				break;
+			}
+		} while (menu != 0);
+	}
+	
+	/*void TIcket(){
+		do {
+			System.out.println("--------------이용권 구매 여부-----------------");
+			System.out.println("이용권 갯수 : " + user.getU_ticket());
+//			System.out.println("이용권 구매 날짜 : " + ticketList.get(ticket));
+			System.out.println("\n" + "1. 이용권 구매 2.이전 메뉴");
+			menu = Integer.parseInt(s.nextLine());
+			switch (menu) {
+			case 1:
+				System.out.println("이용권을 구매 했습니다.");
+				ticket += 20;
+				user.setU_ticket(ticket);
+				Ticket.setT_buy_date(today);
+				Ticket.setT_number(ticket);
+				ticketDao.insertTicket(Ticket);
+				break;
+			case 2:
+				userService.userInfo();
+				break;
+			}
+		}while(menu != 0);
+	}*/
 }

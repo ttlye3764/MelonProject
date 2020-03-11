@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import vo.MusicVO;
 import vo.UserVO;
-import vo.ticketVO;
+import vo.TicketVO;
 import controller.UserController;
 import dao.TicketDao;
 import dao.UserDao;
@@ -91,45 +91,7 @@ public class UserService {
 	}
 
 	// 회원 정보
-	public void userInfo() {
-		Scanner s = new Scanner(System.in);
-		UserController userController = UserController.getInstance();
-		int menu;
-		UserVO user = Session.LoginUser;
-		do {
-			System.out.println("--------------내 정보-----------------");
-			System.out.println(" 내 아이디 : " + user.getU_id()); // 세션에 있는 아이디를 가지고
-																// 온다.
-			System.out.println(" 내 닉네임 : " + user.getU_n_name()); // 세션에 있는 닉네임을 가져온다.
-			System.out.println(" 현재 보유중인 이용권 : " + user.getU_ticket());
-			System.out.println(" 1. 이용권 구매");
-			System.out.println(" 2. 비밀번호 변경");
-			System.out.println(" 3. 닉네임 변경");
-			System.out.println(" 4. 회원 탈퇴");
-			System.out.println(" 5. 이전 메뉴");
-			System.out.println("-------------------------------------");
-			menu = Integer.parseInt(s.nextLine());
-			switch (menu) {
-			case 1:
-				TicketPurchase();
-				break;
-			case 2:
-				PWchange();
-				break;
-			case 3:
-				NMchange();
-				break;
-			case 4:
-				userDelete();
-				break;
-			case 5:
-				userController.userLoginMenu();
-				break;
-			case 0:
-				break;
-			}
-		} while (menu != 0);
-	}
+	
 
 	// 회원 삭제 03.09 코딩 (코드가 돌아가나, 삭제했을 때 초기 화면으로 안돌아감)
 	public void userDelete() {
@@ -169,7 +131,6 @@ public class UserService {
 
 				Session.LoginUser.setU_pw(password);
 				System.out.println("비밀번호가 변경되었습니다.");
-				userInfo();
 				break;
 			} else {
 				System.out.println("비밀번호가 틀립니다.");
@@ -202,49 +163,7 @@ public class UserService {
 
 	}
 
-	// 이용권 구매 여부 03.11 코딩중
-	public void TicketPurchase() {
-		Scanner s = new Scanner(System.in);
-		UserVO user = Session.LoginUser;
-		ticketVO Ticket = new ticketVO();
-		/*ticketVO Ticket = ticketDao.();*/
-		ArrayList<ticketVO> ticketList = ticketDao.selectticketList();
-		int menu = 0; //Ticket.getT_number();
-		int ticket = user.getU_ticket();
-		String name = user.getU_name();
-		for(int i = 0; i < ticketList.size(); i++){
-			ticketList.get(i).setU_name(name);
-		}
-		Date today = new Date();// 날짜를 표현하는 클래스,현재 날짜가 저장
-		//today = Ticket.getT_buy_date();
-		do {
-			System.out.println("--------------이용권 구매 여부-----------------");
-			System.out.println("이용권 갯수 : " + user.getU_ticket());
-//			System.out.println("이용권 구매 날짜 : " + ticketList.get(ticket));
-			System.out.println("\n" + "1. 이용권 구매 2.이전 메뉴");
-			menu = Integer.parseInt(s.nextLine());
-			switch (menu) {
-			case 1:
-				System.out.println("이용권을 구매 했습니다.");
-				ticket += 20;
-				user.setU_ticket(ticket);
-				Ticket.setT_buy_date(today);
-				Ticket.setT_number(ticket);
-				ticketDao.insertTicket(Ticket);
-				break;
-			case 2:
-				userInfo();
-				break;
-			}
-		}while(menu != 0);
-	}
 	
-	public void Ticket(){
-		Scanner s = new Scanner(System.in);
-		UserVO user = Session.LoginUser;
-		
-		
-	}
 }
 
 

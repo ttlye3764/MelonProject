@@ -7,8 +7,8 @@ import vo.MusicVO;
 import vo.O_BoardVO;
 import vo.PlayListVO;
 import vo.R_playListVO;
+import vo.TicketVO;
 import vo.UserVO;
-import vo.ticketVO;
 
 public class Database {
 
@@ -37,7 +37,11 @@ public class Database {
 	
 	public ArrayList<O_BoardVO> tb_o_board = new ArrayList<>(); //공지사항 게시판
 	
-	public ArrayList<ticketVO> tb_ticket = new ArrayList<>(); //티켓
+	public ArrayList<TicketVO> tb_ticket = new ArrayList<>(); //티켓
+	
+	
+	
+	
 	
 	
 	

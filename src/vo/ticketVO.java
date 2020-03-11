@@ -2,30 +2,37 @@ package vo;
 
 import java.util.Date;
 
-public class ticketVO {
+public class TicketVO {
 
-	private int t_number; // 티켓 수량
-	private Date t_buy_date;  // 티켓 산 날짜
-	private String u_name; // 사용자 이름
+	String u_Id;
+	int ticket_M_Amount;
+	String ticket_Buy_Date;
 	
+	public String getTicket_Buy_Date() {
+		return ticket_Buy_Date;
+	}
+	public void setTicket_Buy_Date(String ticket_Buy_Date) {
+		this.ticket_Buy_Date = ticket_Buy_Date;
+	}
+	int ticket_Price;
 	
-	public int getT_number() {
-		return t_number;
+	public int getTicket_M_Amount() {
+		return ticket_M_Amount;
 	}
-	public void setT_number(int t_number) {
-		this.t_number = t_number;
+	public void setTicket_M_Amount(int ticket_M_Amount) {
+		this.ticket_M_Amount = ticket_M_Amount;
 	}
-	public Date getT_buy_date() {
-		return t_buy_date;
+	public int getTicket_Price() {
+		return ticket_Price;
 	}
-	public void setT_buy_date(Date t_buy_date) {
-		this.t_buy_date = t_buy_date;
+	public void setTicket_Price(int ticket_Price) {
+		this.ticket_Price = ticket_Price;
 	}
-	public String getU_name() {
-		return u_name;
+	public String getU_Id() {
+		return u_Id;
 	}
-	public void setU_name(String u_name) {
-		this.u_name = u_name;
+	public void setU_Id(String u_Id) {
+		this.u_Id = u_Id;
 	}
 	
 	

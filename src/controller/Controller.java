@@ -109,7 +109,9 @@ public class Controller {
 	void o_board() {
 		Scanner scan = new Scanner(System.in);
 		O_boardService o_boardService = O_boardService.getInstance();
-		Controller controller = Controller.getInstance();
+		
+		AdminController adminController = AdminController.getInstance();
+		UserController userController = UserController.getInstance();
 		int menu;
 		do {
 			System.out.println("1. 공지사항 보기  2.이전 메뉴로 가기   0.프로그램 종료");
@@ -121,7 +123,14 @@ public class Controller {
 				o_boardService.o_boardList();
 				break;
 			case 2:
-				controller.start();
+				if(Session.LoginUser == null){
+					start();	
+				}else if(Session.LoginUser.getU_id().equals("admin")){
+					adminController.adminLoginMenu();
+				}else{
+					userController.userLoginMenu();
+				}
+				
 				break;
 			}
 		} while (menu != 0);
