@@ -4,7 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import vo.MusicVO;
 import vo.TicketVO;
+import vo.UserVO;
+import dao.MusicDao;
 import dao.TicketDao;
 import data.Database;
 import data.Session;
@@ -22,7 +25,7 @@ public class TicketService {
 		}
 		return instance;
 	}
-
+	MusicDao musicDao = MusicDao.getInstance();
 	TicketDao ticketDao = TicketDao.getInstance();
 
 	Database database = Database.getInstance();
@@ -35,7 +38,7 @@ public class TicketService {
 		Database database = Database.getInstance();
 
 		ticketVO.setU_Id(Session.LoginUser.getU_id());
-		ticketVO.setTicket_M_Amount(20);
+		ticketVO.setTicket_M_Amount(2);
 		ticketVO.setTicket_Price(10000);
 		ticketVO.setTicket_Buy_Date(format.format(time));
 		
@@ -92,6 +95,28 @@ public class TicketService {
 			}
 		}
 		System.out.println(ticketDate);
+	}
+
+	public void listenPlaylist(UserVO uservo, MusicVO music) {
+		ArrayList<TicketVO> ticketList = ticketDao.ticketList();	
+		boolean check = true;
+		for (int i = 0; i < ticketList.size(); i++) {
+			if(ticketList.get(i).getU_Id().equals(uservo.getU_id())){
+				if(ticketList.get(i).getTicket_M_Amount()<1){
+					continue;
+				}
+				else{
+				ticketList.get(i).setTicket_M_Amount(ticketList.get(i).getTicket_M_Amount()-1);
+				musicDao.insertR_playList(music); // 최근들은노래리스트에 음악 insert 부분
+				musicDao.CountPlus(music);
+				check = false;
+				break;
+				}				
+			}				
+		}
+		if(check){
+			System.out.println("사용 가능한 이용권이 없습니다.");
+		}
 	}
 
 }
