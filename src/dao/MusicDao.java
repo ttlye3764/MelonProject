@@ -95,7 +95,7 @@ public class MusicDao {
 	}
 
 	public void insertR_playList(MusicVO music) {   //최근 들은 노래 리스트		
-		boolean check = true;
+	
 		UserVO uservo = Session.LoginUser;  //로그인된 user정보를 가져오기 위해 세션을 사용
 		
 		String u_id = uservo.getU_id();
@@ -104,19 +104,8 @@ public class MusicDao {
 		
 		r_playlist.setU_id(u_id);
 		r_playlist.setM_number(m_number);	
-		
-		for (int i = 0; i < database.tb_r_playlist.size(); i++) {
-			if ((database.tb_r_playlist.get(i).getM_number() == music.getM_number())){				
-				System.out.println("이미 추가된 노래입니다.");
-				check = false;
-				break;
-			}
-		}
-		if (check) {
-			database.tb_r_playlist.add(r_playlist);		
-			System.out.println("최근 들은 노래 리스트에 추가 되었습니다.");
-			
-		}
+		database.tb_r_playlist.add(r_playlist);		
+		System.out.println("최근 들은 노래 리스트에 추가 되었습니다.");
 	}
 
 	public ArrayList<R_playListVO> R_PlayList() {   // 최근들은노래 리스트
@@ -163,5 +152,6 @@ public class MusicDao {
 			} 
 		}
 	}
+
 
 }

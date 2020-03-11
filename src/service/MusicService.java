@@ -87,9 +87,9 @@ public class MusicService {
 		String name = s.nextLine();
 		System.out.print("가수 : ");
 		String singer = s.nextLine();
-
 		MusicVO music = new MusicVO();
-
+		UserVO uservo = Session.LoginUser;
+		TicketService ticketservice = new TicketService();
 		music.setM_name(name);
 		music.setM_singer(singer);
 
@@ -109,9 +109,8 @@ public class MusicService {
 				System.out.println("1. 듣기               2. 리스트에 담기");
 				int check = Integer.parseInt(s.nextLine());
 				switch (check) {
-				case 1:
-					musicDao.insertR_playList(music); // 최근들은노래리스트에 음악 insert 부분
-					musicDao.CountPlus(music);
+				case 1:				
+					ticketservice.listenPlaylist(uservo,music);
 					break;
 				case 2:
 					musicDao.insert_playList(music); // 사용자 플레이리스트에 음악 insert 부분
@@ -167,8 +166,7 @@ public class MusicService {
 		for (int i = 0; i < r_playlist.size(); i++) {
 			if (r_playlist.get(i).getU_id().equals(uservo.getU_id())) {
 				for (int j = 0; j < musicList.size(); j++) {
-					if (musicList.get(j).getM_number() == r_playlist.get(i)
-							.getM_number()) {
+					if (musicList.get(j).getM_number() == r_playlist.get(i).getM_number()) {
 						System.out.println(musicList.get(j).getM_number()
 								+ "\t" + musicList.get(j).getM_name() + "\t"
 								+ musicList.get(j).getM_singer());

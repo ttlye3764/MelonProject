@@ -6,7 +6,7 @@ public class UserVO {
 	private String u_pw;
 	private String u_name; // 유저 이름
 	private String u_n_name;
-	private int u_ticket; // 사용자 티켓
+	private int u_ticket; // 티켓1,티켓2             
 	
 	public boolean equals(Object obj) {
 		if (this == obj)
