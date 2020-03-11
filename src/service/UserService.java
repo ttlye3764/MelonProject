@@ -53,11 +53,11 @@ public class UserService {
 
 	// 로그인
 	public void login() {
-		Scanner s = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
 		System.out.print("아이디 : ");
-		String id = s.nextLine();
+		String id = scan.nextLine();
 		System.out.print("비밀번호: ");
-		String password = s.nextLine();
+		String password = scan.nextLine();
 
 		HashMap<String, String> param = new HashMap<>();
 		param.put("ID", id);
@@ -73,7 +73,6 @@ public class UserService {
 			System.out.println(user.getU_name() + "님 환영합니다.");
 			Session.LoginUser = user;
 		}
-
 	}
 
 	// 회원목록

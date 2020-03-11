@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Scanner;
 
+import service.M_BoardService;
 import service.MusicService;
 import service.O_boardService;
 import service.UserService;
@@ -24,6 +25,7 @@ public class AdminController {
 	// 관리자 메뉴
 	public void adminLoginMenu() {
 		Scanner scan = new Scanner(System.in);
+		Controller controller = Controller.getInstance();
 		int menu;
 		do {
 			System.out.println("-----------------------------------------------------------------------");
@@ -44,6 +46,7 @@ public class AdminController {
 				break;
 			case 3:
 				// 노래추천 게시판 관리 메소드 호출
+				m_board();
 				break;
 
 			case 4:
@@ -54,6 +57,7 @@ public class AdminController {
 				// 로그아웃
 				Session.LoginUser = null;
 				System.out.println("로그아웃이 완료 되었습니다.");
+				controller.start();
 
 			case 0: // 프로그램 종료
 				break;
@@ -100,8 +104,10 @@ public class AdminController {
 			case 1:
 				// 음원검색 메소드 호출
 				musicService.searchMusic();
+				break;
 			case 2:
 				userController.chart();
+				break;
 			case 3:
 				// 음원 등록 메소드 호출
 				musicService.InsertMusic();
@@ -112,6 +118,7 @@ public class AdminController {
 				break;
 			case 5:
 				adminLoginMenu();
+				break;
 			case 0:
 				System.out.println("프로그램 종료");
 			}
@@ -154,5 +161,32 @@ public class AdminController {
 			}
 
 		} while (menu != 5 && menu != 6);
+	}
+	// 게시판 관리 컨트롤러
+	void m_board() {
+		Scanner scan = new Scanner(System.in);
+		M_BoardService m_boardService = M_BoardService.getInstance();
+		UserController usercontroller = UserController.getInstance();
+		int menu;
+		do {
+			System.out.println("1.게시판 보기 2.게시판 삭제  3.이전 메뉴로 가기   0.프로그램 종료");
+			menu = Integer.parseInt(scan.nextLine());
+
+			switch (menu) {
+			case 1:
+				// 노래추천 게시판 보기
+				m_boardService.m_BoardList();
+				break;
+			case 2 :
+				//노래추천 게시판 삭제
+				m_boardService.deleteM_Board();
+				break;
+			case 3:
+				adminLoginMenu();;
+				break;
+			case 0:
+				System.out.println("프로그램 종료");
+			}
+		} while (menu != 0);
 	}
 }
