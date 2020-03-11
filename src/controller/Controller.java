@@ -50,19 +50,41 @@ public class Controller {
 		MusicService musicService = MusicService.getInstance();
 		Scanner s = new Scanner(System.in);
 		int menu; // 메인 기능
+        
+        
+                  
+System.out.println("                                                                                               ");           
+System.out.println("                                                              ,eee                             ");                               
+System.out.println("                                                              eeeee                            ");                              
+System.out.println("                                             W#,             ee  eeK                           ");                             
+System.out.println("                                            Geee        9eeeGe   eee                           ");                             
+System.out.println("             Keeee      ueeeu               Weee     eeeeeeeeeee  eee                          ");                            
+System.out.println("              yeeee      eeeG                eee   Keee      #eee    ,                         ");                           
+System.out.println("               eeeeE    Deeee       eeeeee   eeeu  eee     uuKXeee  eeee  ,5u                  ");                    
+System.out.println("              GeeeeeD   eeeeeE   ,eeeeX5eee  eeey eee  ,,,uKyXXGeeK eee yeeeeez                ");                  
+System.out.println("              eee eeey eee eee,  eeeeeEXeee# eeeX eeeK KWWW5D#zeee  eeeeee5eeee                ");                  
+System.out.println("             yeee ,eeeeeeu #eee  eee, DeeeeK eee9 Keeey5XDz##9Eeee  eeeez  eee9                ");                  
+System.out.println("             eeeX  ueeeey   eeee yeee#       Eeee  XeeeeE#9Eeeeee   Geey   eee,                ");                  
+System.out.println("            Keee     eeW     eeeX  #eeeee    eeee    Geeeeeeeeey          Geez                 ");                   
+System.out.println("            eeeE                                        y##X,                                  ");                                    
+System.out.println("              W                                                                                ");                 
+System.out.println("                                                                                               ");        
+System.out.println("                                                                                               ");        
+
 
 		do {
+	
 			System.out
-					.println("-----------------------------------------------------------------------");
+					.println("====================================================================================");
 			System.out
 					.println("국내 최다 4000만곡 보유, No.1 뮤직플랫폼 멜론! 실시간 차트부터 나를 아는 똑똑한 음악추천까지!");
 			System.out
-					.println("-----------------------------------------------------------------------");
+					.println("====================================================================================");
 			System.out.println("1.로그인" + "\t" + "2.회원가입" + "\t" + "3.노래 검색"
 					+ "\t" + " 4.차트보기" + "\t" + "5.노래추천 게시판" + "\t" + "6. 공지사항"
 					+ " 0.종료");
 			System.out
-					.println("-----------------------------------------------------------------------");
+					.println("====================================================================================");
 			System.out.print("메뉴에 해당하는 번호를 입력해주세요. >");
 			menu = Integer.parseInt(s.nextLine());
 
