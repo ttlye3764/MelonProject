@@ -12,7 +12,7 @@ import controller.UserController;
 import dao.TicketDao;
 import dao.UserDao;
 import data.Session;
-//1234
+
 public class UserService {
 
 	private static UserService instance;

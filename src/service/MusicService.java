@@ -1,5 +1,6 @@
 package service;
 
+import java.nio.channels.SeekableByteChannel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import vo.R_playListVO;
 import vo.UserVO;
 import dao.MusicDao;
 import dao.UserDao;
+import data.Session;
 
 public class MusicService {
 	
@@ -34,7 +36,7 @@ public class MusicService {
 		MusicVO music = new MusicVO();
 		
 		System.out.print("노래 등록 번호 : ");
-		int number= Integer.parseInt(s.nextLine());
+		int number= Integer.parseInt(s.nextLine()); 
 		System.out.print("노래 제목 : ");
 		String name = s.nextLine();
 		System.out.print("가수 : ");
@@ -134,16 +136,17 @@ public class MusicService {
 		ArrayList<MusicVO> musicList = musicDao.MusicList();
 		ArrayList<R_playListVO> r_playlist = musicDao.R_PlayList();  //m_number  노래등록번호
 		ArrayList<MusicVO> r_list = new ArrayList<>(); 
-		
+		UserVO uservo = Session.LoginUser;
 		System.out.println("최근 들은 노래 리스트");
 		
 		for (int i = 0; i < r_playlist.size(); i++) {
-			for (int j = 0; j < musicList.size(); j++) {
-				if(musicList.get(j).getM_number()==r_playlist.get(i).getM_number()){
-					r_list.add(musicList.get(j));
+			if(r_playlist.get(i).getU_id().equals(uservo.getU_id())){
+				for (int j = 0; j < musicList.size(); j++) {
+					if(musicList.get(j).getM_number() == r_playlist.get(i).getM_number()){
+						System.out.println(musicList.get(j).getM_number() + "\t" + musicList.get(j).getM_name() + "\t" + musicList.get(j).getM_singer());
+					}
 				}
-			}				
-			System.out.println(r_list.get(i).getM_number() + "\t" + r_list.get(i).getM_name() + "\t" + r_list.get(i).getM_singer());
+			}			
 		}
 	}
 	
@@ -153,16 +156,17 @@ public void Show_MusicList() {					//사용자 플레이 리스트 보기
 		ArrayList<MusicVO> musicList = musicDao.MusicList();
 		ArrayList<PlayListVO> playlist = musicDao.PlayList();  //m_number  노래등록번호
 		ArrayList<MusicVO> list = new ArrayList<>(); 
-		
+		UserVO uservo = Session.LoginUser;
 		System.out.println("플레이 리스트");
 		
 		for (int i = 0; i < playlist.size(); i++) {
-			for (int j = 0; j < musicList.size(); j++) {
-				if(musicList.get(j).getM_number()==playlist.get(i).getM_number()){
-					list.add(musicList.get(j));
+			if(playlist.get(i).getU_id().equals(uservo.getU_id())){
+				for (int j = 0; j < musicList.size(); j++) {
+					if(musicList.get(j).getM_number() == playlist.get(i).getM_number()){
+						System.out.println(musicList.get(j).getM_number() + "\t" + musicList.get(j).getM_name() + "\t" + musicList.get(j).getM_singer());
+					}
 				}
-			}				
-			System.out.println(list.get(i).getM_number() + "\t" + list.get(i).getM_name() + "\t" + list.get(i).getM_singer());
+			}			
 		}
 	}
 	
@@ -332,7 +336,7 @@ public void MusicChart(){		//인기 차트 보기
 	System.out.println("-----------------------인기  차트-----------------------");
 	System.out.println("등록번호\t노래제목\t가수\t작사\t작곡\t장르\t음원날짜\t들은횟수\t");
 	
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < musicChart.length; i++) {
 		MusicVO music = musicChart[i];
 		System.out.println((i+1) + "위" + "\t" + music.getM_name() + "\t" + music.getM_singer() + "\t" + music.getM_lyrics() + "\t" +
 		music.getM_composition() + "\t" + music.getM_genre() + "\t" + music.getM_date() + "\t" + music.getM_count());
@@ -376,9 +380,9 @@ public void R_MusicChart(){		//최신곡 차트 보기
 	System.out.println("-----------------------최신곡  차트-----------------------");
 	System.out.println("등록번호\t노래제목\t가수\t작사\t작곡\t장르\t음원날짜\t들은횟수\t");
 	
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < musicChart.length; i++) {
 		MusicVO music = musicChart[i];
-		System.out.println((i+1) + "위" + "\t" + music.getM_name() + "\t" + music.getM_singer() + "\t" + music.getM_lyrics() + "\t" +
+		System.out.println((i+1) + "\t" + music.getM_name() + "\t" + music.getM_singer() + "\t" + music.getM_lyrics() + "\t" +
 		music.getM_composition() + "\t" + music.getM_genre() + "\t" + music.getM_date() + "\t" + music.getM_count());
 	}		
 }
