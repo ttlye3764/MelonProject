@@ -75,22 +75,6 @@ public class UserService {
 			Session.LoginUser = user;
 		}
 	}
-
-	// 회원목록
-	public void userList() {
-		ArrayList<UserVO> userList = userDao.selectUserList();
-		System.out.println("-----------------------------------------------");
-		System.out.println("번호\t아이디\t이름");
-		System.out.println("-----------------------------------------------");
-		for (int i = 0; i < userList.size(); i++) {
-			UserVO user = userList.get(i);
-			System.out.println(i + 1 + "\t" + user.getU_id() + "\t"
-					+ user.getU_name());
-		}
-		System.out.println("------------------------------------------------");
-	}
-
-	// 회원 정보
 	
 
 	// 회원 삭제 03.09 코딩 (코드가 돌아가나, 삭제했을 때 초기 화면으로 안돌아감)

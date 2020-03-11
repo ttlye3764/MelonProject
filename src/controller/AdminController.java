@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Scanner;
 
+import service.AdminService;
 import service.M_BoardService;
 import service.MusicService;
 import service.O_boardService;
@@ -68,19 +69,20 @@ public class AdminController {
 
 	void admUserMange() {
 		Scanner scan = new Scanner(System.in);
-		UserService userService = UserService.getInstance();
+//		UserService userService = UserService.getInstance();
+		AdminService adminService = AdminService.getInstance();
 		int menu;
 		do {
 			System.out.println("1. 회원 목록 조회    2. 회원 삭제  3.이전 메뉴로 가기    4.프로그램 종료");
 			menu = Integer.parseInt(scan.nextLine());
 			switch (menu) {
 			case 1:
-				userService.userList();
+				adminService.userList();
 				// 회원 목록조회 메소드 호출
 				break;
 			case 2:
 				// 회원삭제 메소드 호출
-				userService.userDelete();
+				adminService.userdelete();
 				break;
 			case 3:
 				// 관리자 로그인 화면 메소드 호출
