@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import vo.MusicVO;
 import vo.UserVO;
 import vo.ticketVO;
 import controller.UserController;
@@ -47,7 +48,7 @@ public class UserService {
 		user.setU_id(u_id);
 		user.setU_pw(u_pw);
 		user.setU_name(u_name);
-		user.setU_name(u_n_name);
+		user.setU_n_name(u_n_name);
 		userDao.insertUser(user);
 	}
 
@@ -99,9 +100,9 @@ public class UserService {
 			System.out.println("--------------내 정보-----------------");
 			System.out.println(" 내 아이디 : " + user.getU_id()); // 세션에 있는 아이디를 가지고
 																// 온다.
-			System.out.println(" 내 닉네임 : " + user.getU_name()); // 세션에 있는 닉네임을
-																// 가져온다.
-			System.out.println(" 1. 이용권 구매 여부 ");
+			System.out.println(" 내 닉네임 : " + user.getU_n_name()); // 세션에 있는 닉네임을 가져온다.
+			System.out.println(" 현재 보유중인 이용권 : " + user.getU_ticket());
+			System.out.println(" 1. 이용권 구매");
 			System.out.println(" 2. 비밀번호 변경");
 			System.out.println(" 3. 닉네임 변경");
 			System.out.println(" 4. 회원 탈퇴");
@@ -130,7 +131,7 @@ public class UserService {
 		} while (menu != 0);
 	}
 
-	// 회원 삭제 03.09 코딩
+	// 회원 삭제 03.09 코딩 (코드가 돌아가나, 삭제했을 때 초기 화면으로 안돌아감)
 	public void userDelete() {
 		Scanner s = new Scanner(System.in);
 		System.out.println("회원 탈퇴를 위한 정보를 입력해주세요.");
@@ -138,7 +139,7 @@ public class UserService {
 		String id = s.nextLine();
 		System.out.print("비밀번호 : ");
 		String pw = s.nextLine();
-
+		
 		UserVO user = new UserVO();
 
 		user.setU_id(id);
@@ -146,8 +147,9 @@ public class UserService {
 
 		userDao.deleteUser(user);
 	}
+	
 
-	// 비밀번호 변경
+	// 비밀번호 변경(비밀번호 변경 됨)
 	public void PWchange() {
 		Scanner s = new Scanner(System.in);
 		String password = null;
@@ -175,7 +177,7 @@ public class UserService {
 		} while (pwCheck != null);
 	}
 
-	// 닉네임 변경
+	// 닉네임 변경 (성공적으로 돌아감)
 	public void NMchange() {
 		Scanner s = new Scanner(System.in);
 		String name = null;
@@ -192,6 +194,7 @@ public class UserService {
 			if (nmCheck != null) { // 닉네임이 중복되었을 때
 				System.out.println("중복된 닉네임입니다.");
 			} else {
+				
 				Session.LoginUser.setU_n_name(name);
 				System.out.println("닉네임이 변경되었습니다.");
 			}
@@ -199,32 +202,33 @@ public class UserService {
 
 	}
 
-	// 이용권 구매 여부 03.09 코딩
+	// 이용권 구매 여부 03.11 코딩중
 	public void TicketPurchase() {
 		Scanner s = new Scanner(System.in);
 		UserVO user = Session.LoginUser;
 		ticketVO Ticket = new ticketVO();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy년mm월dd일 hh시mm분");
-		Date today = new Date(); // 날짜를 표현하는 클래스,현재 날짜가 저장
-		int menu = 0;
+		/*ticketVO Ticket = ticketDao.();*/
+		ArrayList<ticketVO> ticketList = ticketDao.selectticketList();
+		int menu = 0; //Ticket.getT_number();
 		int ticket = user.getU_ticket();
 		String name = user.getU_name();
+		for(int i = 0; i < ticketList.size(); i++){
+			ticketList.get(i).setU_name(name);
+		}
+		Date today = new Date();// 날짜를 표현하는 클래스,현재 날짜가 저장
+		//today = Ticket.getT_buy_date();
 		do {
 			System.out.println("--------------이용권 구매 여부-----------------");
 			System.out.println("이용권 갯수 : " + user.getU_ticket());
-			System.out.println("이용권 구매 날짜 : " + Ticket.getT_buy_date() + Ticket.getT_buy_date() );
-			System.out.println("데이터 베이스에 저장된 이용권 갯수 : " + Ticket.getT_number());
-			System.out.println("데이터 베이스에 저장된 닉네임 : " + Ticket.getU_name());
+//			System.out.println("이용권 구매 날짜 : " + ticketList.get(ticket));
 			System.out.println("\n" + "1. 이용권 구매 2.이전 메뉴");
 			menu = Integer.parseInt(s.nextLine());
-			
 			switch (menu) {
 			case 1:
 				System.out.println("이용권을 구매 했습니다.");
 				ticket += 20;
 				user.setU_ticket(ticket);
 				Ticket.setT_buy_date(today);
-				Ticket.setU_name(name);
 				Ticket.setT_number(ticket);
 				ticketDao.insertTicket(Ticket);
 				break;
@@ -233,6 +237,13 @@ public class UserService {
 				break;
 			}
 		}while(menu != 0);
+	}
+	
+	public void Ticket(){
+		Scanner s = new Scanner(System.in);
+		UserVO user = Session.LoginUser;
+		
+		
 	}
 }
 

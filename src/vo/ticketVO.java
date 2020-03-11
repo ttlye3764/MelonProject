@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class ticketVO {
 
-	private int t_number;
-	private Date t_buy_date;
-	private String u_name;
+	private int t_number; // 티켓 수량
+	private Date t_buy_date;  // 티켓 산 날짜
+	private String u_name; // 사용자 이름
 	
 	
 	public int getT_number() {

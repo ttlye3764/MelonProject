@@ -4,9 +4,9 @@ public class UserVO {
 	
 	private String u_id;
 	private String u_pw;
-	private String u_name;
+	private String u_name; // 유저 이름
 	private String u_n_name;
-	private int u_ticket;
+	private int u_ticket; // 사용자 티켓
 	
 	public boolean equals(Object obj) {
 		if (this == obj)

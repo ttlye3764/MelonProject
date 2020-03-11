@@ -25,18 +25,26 @@ public class TicketDao {
 		boolean check = true;
 		for (int i= 0; i < database.tb_ticket.size(); i++) {
 			if((database.tb_ticket.get(i).getU_name()).equals(ticket.getU_name())){
-				System.out.println("");
-				check = false;
+				database.tb_ticket.add(ticket);
+				//check = false;
 				break;
 			}							
 		}
 		if(check){
-			database.tb_ticket.add(ticket);	
-			System.out.println("");
+			database.tb_ticket.add(ticket);
 		}
-
 	}
 	
+	
+	
+	public void u_namecompare(ticketVO ticket) {
+		for (int i = 0; i<database.tb_ticket.size(); i++){
+			if((database.tb_ticket.get(i).getU_name()).equals(ticket.getU_name())){
+				
+			}
+			}
+		}
+	//03.10
 	public ticketVO selectticket(HashMap<String, Object> param) {
 		ticketVO rtnTicket = null;
 		for (int i = 0; i < database.tb_ticket.size(); i++) {
@@ -44,11 +52,11 @@ public class TicketDao {
 			boolean flag  = true;
 			for(String key : param.keySet()){
 				Object value = param.get(key);
-				if(key.equals("ID")){
+				if(key.equals("NAME")){
 					if(!ticket.getU_name().equals(value)) flag = false;
-				}else if(key.equals("PASSWORD")){
+				}else if(key.equals("TICKET")){
 					if((Integer)ticket.getT_number() != value) flag = false;
-				}else if(key.equals("NAME")){
+				}else if(key.equals("DATE")){
 					if(!ticket.getT_buy_date().equals(value)) flag = false;
 				}
 			}
@@ -56,7 +64,8 @@ public class TicketDao {
 		}
 	return rtnTicket;
 }
-	public ArrayList<ticketVO> selectticket() {
+	
+	public ArrayList<ticketVO> selectticketList() {
 		
 		return database.tb_ticket;
 	}

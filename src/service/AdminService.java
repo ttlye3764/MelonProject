@@ -25,13 +25,17 @@ public class AdminService {
 	
 	
 	
+	
+	
 	//노래 추천 게시판 관리
 	void m_boradMange() {
+		
 		
 	}
 	
 	//공지사항 게시판 관리
 	void o_boradMange() {
+		
 		
 	}
 	
