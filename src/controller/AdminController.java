@@ -104,8 +104,10 @@ public class AdminController {
 			case 1:
 				// 음원검색 메소드 호출
 				musicService.searchMusic();
+				break;
 			case 2:
 				userController.chart();
+				break;
 			case 3:
 				// 음원 등록 메소드 호출
 				musicService.InsertMusic();
@@ -116,6 +118,7 @@ public class AdminController {
 				break;
 			case 5:
 				adminLoginMenu();
+				break;
 			case 0:
 				System.out.println("프로그램 종료");
 			}

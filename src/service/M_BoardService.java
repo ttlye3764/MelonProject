@@ -1,4 +1,5 @@
 package service;
+
 //test
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,24 +49,16 @@ public class M_BoardService {
 		board.setM_b_content(content);
 		board.setM_number(number);
 		board.setM_b_date(format.format(time));
-		board.setM_b_number(database.tb_m_board.size()+1);
+		board.setM_b_number(database.tb_m_board.size() + 1);
 
 		boolean check = true;
-		
-		//게시판 제목은 중복될 필요가 없다.
-		/*for (int i = 0; i < database.tb_m_board.size(); i++) {
-			if (database.tb_m_board.get(i).getM_b_name().equals(board.getM_b_name())) {
-				System.out.println("중복된 제목입니다.");
-				check = false;
-				break;
-			}
-		}*/
-			if(musicService.searchNumberMusic(number)==null){
-				
-				System.out.println("해당하는 번호의 노래가 없습니다.");
-				check = false;
-			}
-			
+
+		if (musicService.searchNumberMusic(number) == null) {
+
+			System.out.println("해당하는 번호의 노래가 없습니다.");
+			check = false;
+		}
+
 		if (check) {
 			System.out.println("게시글이 등록되었습니다.");
 			m_boardDao.insertboard(board);
@@ -102,62 +95,62 @@ public class M_BoardService {
 				m_boardvo.setM_number(m_Number);
 
 				m_boardDao.modifyM_board(m_boardvo);
-
 			}
 		}
-
 	}
 
-	/*//삭제
-	  public void deleteBoard(){
-		  Scanner scan = new Scanner(System.in);
-		  m_boardVO =  
-		  
-	  }*/
-	 
-	  public void deleteM_Board(){
-	      M_BoardVO m_boardVO = new M_BoardVO();
-	      Scanner sc = new Scanner(System.in);
+	public void deleteM_Board() {
+		M_BoardVO m_boardVO = new M_BoardVO();
+		Scanner sc = new Scanner(System.in);
 
-	      m_BoardList();
-	      System.out.println("삭제할 게시글의 번호를 선택해주세요");
-	      int number = Integer.parseInt(sc.nextLine());
-	      
-	      m_boardVO = m_boardDao.selectM_borad(number);
-	      
-	      if(m_boardVO.getU_id().equals(Session.LoginUser.getU_id()) || Session.LoginUser.getU_id().equals("admin")){
-	         m_boardDao.deleteM_Board(number);
-	      }else{
-	         System.out.println("게시자가 다릅니다");
-	      }
-	   }
-	  
+		m_BoardList();
+		System.out.println("삭제할 게시글의 번호를 선택해주세요");
+		int number = Integer.parseInt(sc.nextLine());
+
+		m_boardVO = m_boardDao.selectM_borad(number);
+
+		if (m_boardVO.getU_id().equals(Session.LoginUser.getU_id())
+				|| Session.LoginUser.getU_id().equals("admin")) {
+			m_boardDao.deleteM_Board(number);
+		} else {
+			System.out.println("게시자가 다릅니다");
+		}
+	}
 
 	// 조회
 	public void m_BoardList() {
-		
+
 		M_BoardDao m_boardDao = M_BoardDao.getInstance();
 		MusicService musicService = MusicService.getInstance();
 		ArrayList<M_BoardVO> m_boardList = m_boardDao.boardList();
-		
+
 		System.out.println("-----------------------------------");
 		System.out.println("번호\t제목\t내용\t이름\t날짜\t추천 노래번호\t제목\t가수");
 		System.out.println("-----------------------------------");
-		
+
 		for (int i = 0; i < m_boardList.size(); i++) {
-			System.out.println(m_boardList.get(i).getM_b_number() + "\t" + m_boardList.get(i).getM_b_name()
-					+ "\t" + m_boardList.get(i).getM_b_content() + "\t"
-					+ m_boardList.get(i).getU_id() + "\t"
-					+ m_boardList.get(i).getM_b_name() + "\t"
-					+ m_boardList.get(i).getM_b_date() + "\t"
-					+ m_boardList.get(i).getM_number() + "\t"
-					+ musicService.searchNumberMusic(m_boardList.get(i).getM_number()).getM_name() + "\t"
-					+ musicService.searchNumberMusic(m_boardList.get(i).getM_number()).getM_singer() + "\t"
-					);
+			System.out.println(m_boardList.get(i).getM_b_number()
+					+ "\t"
+					+ m_boardList.get(i).getM_b_name()
+					+ "\t"
+					+ m_boardList.get(i).getM_b_content()
+					+ "\t"
+					+ m_boardList.get(i).getU_id()
+					+ "\t"
+					+ m_boardList.get(i).getM_b_name()
+					+ "\t"
+					+ m_boardList.get(i).getM_b_date()
+					+ "\t"
+					+ m_boardList.get(i).getM_number()
+					+ "\t"
+					+ musicService.searchNumberMusic(
+							m_boardList.get(i).getM_number()).getM_name()
+					+ "\t"
+					+ musicService.searchNumberMusic(
+							m_boardList.get(i).getM_number()).getM_singer()
+					+ "\t");
 		}
 
 	}
-	
-	
 
 }

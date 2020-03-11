@@ -90,7 +90,6 @@ public class Controller {
 
 			case 5: // 노래추천 게시판
 				m_board();
-
 				break;
 
 			case 6:

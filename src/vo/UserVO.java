@@ -8,17 +8,6 @@ public class UserVO {
 	private String u_n_name;
 	private int u_ticket;
 	
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((u_id == null) ? 0 : u_id.hashCode());
-		result = prime * result + ((u_name == null) ? 0 : u_name.hashCode());
-		result = prime * result + ((u_pw == null) ? 0 : u_pw.hashCode());
-		return result;
-	}
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

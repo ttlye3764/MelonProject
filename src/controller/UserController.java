@@ -5,6 +5,7 @@ import java.util.Scanner;
 import service.M_BoardService;
 import service.MusicService;
 import service.UserService;
+import vo.UserVO;
 import data.Session;
 
 public class UserController {
@@ -29,12 +30,16 @@ public class UserController {
 		Scanner scan = new Scanner(System.in);
 		int menu;
 		do {
-			System.out.println("-----------------------------------------------------------------------");
-			System.out.println("국내 최다 4000만곡 보유, No.1 뮤직플랫폼 멜론! 실시간 차트부터 나를 아는 똑똑한 음악추천까지!");
-			System.out.println("-----------------------------------------------------------------------");
-			System.out.println(
-					"1. 노래검색		2. 차트보기		3. 플레이리스트		4.내 정보		5.노래추천 게시판		6. 공지사항	7.로그아웃		0.프로그램 종료");
-			System.out.println("-----------------------------------------------------------------------");
+			System.out
+					.println("-----------------------------------------------------------------------");
+			System.out
+					.println("국내 최다 4000만곡 보유, No.1 뮤직플랫폼 멜론! 실시간 차트부터 나를 아는 똑똑한 음악추천까지!");
+			System.out
+					.println("-----------------------------------------------------------------------");
+			System.out
+					.println("1. 노래검색		2. 차트보기		3. 플레이리스트		4.내 정보		5.노래추천 게시판		6. 공지사항	7.로그아웃		0.프로그램 종료");
+			System.out
+					.println("-----------------------------------------------------------------------");
 			System.out.print("메뉴에 해당하는 번호를 입력해주세요. >");
 			menu = Integer.parseInt(scan.nextLine());
 			switch (menu) {
@@ -82,11 +87,16 @@ public class UserController {
 		Scanner scan = new Scanner(System.in);
 		do {
 
-			System.out.println("-----------------------------------------------------------------------");
-			System.out.println("국내 최다 4000만곡 보유, No.1 뮤직플랫폼 멜론! 실시간 차트부터 나를 아는 똑똑한 음악추천까지!");
-			System.out.println("-----------------------------------------------------------------------");
-			System.out.println("1.최신곡 차트		2.인기곡 차트		3.장르별 차트		4.이전 메뉴로 가기		0.프로그램 종료 ");
-			System.out.println("-----------------------------------------------------------------------");
+			System.out
+					.println("-----------------------------------------------------------------------");
+			System.out
+					.println("국내 최다 4000만곡 보유, No.1 뮤직플랫폼 멜론! 실시간 차트부터 나를 아는 똑똑한 음악추천까지!");
+			System.out
+					.println("-----------------------------------------------------------------------");
+			System.out
+					.println("1.최신곡 차트		2.인기곡 차트		3.장르별 차트		4.이전 메뉴로 가기		0.프로그램 종료 ");
+			System.out
+					.println("-----------------------------------------------------------------------");
 			System.out.print("메뉴에 해당하는 번호를 입력해주세요. >");
 			menu = Integer.parseInt(scan.nextLine());
 
@@ -104,14 +114,17 @@ public class UserController {
 				musicService.Genre_MusicChart();
 				break;
 			case 4:
-				if(Session.LoginUser.getU_id().equals("admin")){
-					adminController.musicMange();
-				}else if(Session.LoginUser.getU_id()== null){
+				if (Session.LoginUser == null) {
 					controller.start();
-				}else{
-					userLoginMenu();
 				}
+					if (Session.LoginUser.getU_id().equals("admin")) {
+						adminController.musicMange();
+					} else {
+						userLoginMenu();
+					}
+				
 				break;
+
 			case 0:
 				System.out.println("프로그램 종료");
 			}
@@ -150,7 +163,8 @@ public class UserController {
 		UserController usercontroller = UserController.getInstance();
 		int menu;
 		do {
-			System.out.println("1.게시판 보기  2.게시판 글 쓰기  3.게시판 수정  4.게시판 삭제  5.이전 메뉴로 가기   0.프로그램 종료");
+			System.out
+					.println("1.게시판 보기  2.게시판 글 쓰기  3.게시판 수정  4.게시판 삭제  5.이전 메뉴로 가기   0.프로그램 종료");
 			menu = Integer.parseInt(scan.nextLine());
 
 			switch (menu) {
@@ -158,16 +172,16 @@ public class UserController {
 				// 노래추천 게시판 보기
 				m_boardService.m_BoardList();
 				break;
-			case 2 :
-				//노래추천 게시판 글 쓰기
+			case 2:
+				// 노래추천 게시판 글 쓰기
 				m_boardService.insertM_Board();
 				break;
-			case 3 :
-				//노래추천 게시판 수정
+			case 3:
+				// 노래추천 게시판 수정
 				m_boardService.modifyM_Board();
 				break;
-			case 4 :
-				//노래추천 게시판 삭제
+			case 4:
+				// 노래추천 게시판 삭제
 				m_boardService.deleteM_Board();
 				break;
 			case 5:
