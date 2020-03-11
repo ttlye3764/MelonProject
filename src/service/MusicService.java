@@ -413,8 +413,7 @@ public class MusicService {
 			}
 		}
 
-		System.out
-				.println("-----------------------최신곡  차트-----------------------");
+		System.out.println("-----------------------최신곡  차트-----------------------");
 		System.out.println("등록번호\t노래제목\t가수\t작사\t작곡\t장르\t음원날짜\t들은횟수\t");
 
 		for (int i = 0; i < musicChart.length; i++) {
