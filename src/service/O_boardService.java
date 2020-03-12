@@ -13,7 +13,7 @@ import data.Session;
 public class O_boardService {
 
 	private static O_boardService instance;
-
+	private static int num = 1;
 	O_boardService() {
 	}
 
@@ -59,7 +59,7 @@ public class O_boardService {
 		o_board.setAd_name(Session.LoginUser.getU_id());
 		o_board.setO_b_content(content);
 		o_board.setO_b_date(format.format(time));
-		o_board.setO_b_number(database.tb_o_board.size() + 1);
+		o_board.setO_b_number(num);
 
 		o_boardDao.insertO_borad(o_board);
 	}

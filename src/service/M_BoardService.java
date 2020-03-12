@@ -14,7 +14,7 @@ import data.Session;
 public class M_BoardService {
 
 	private static M_BoardService instance;
-
+	private static int num = 1;
 	private M_BoardService() {
 	}
 
@@ -49,8 +49,8 @@ public class M_BoardService {
 		board.setM_b_content(content);
 		board.setM_number(number);
 		board.setM_b_date(format.format(time));
-		board.setM_b_number(database.tb_m_board.size() + 1);
-
+		board.setM_b_number(num);
+		num++;
 		boolean check = true;
 
 		if (musicService.searchNumberMusic(number) == null) {
@@ -107,8 +107,7 @@ public class M_BoardService {
 		System.out.println("삭제할 게시글의 번호를 선택해주세요");
 		int number = Integer.parseInt(sc.nextLine());
 
-		m_boardVO = m_boardDao.selectM_borad(number);
-
+		m_boardVO = m_boardDao.selectM_borad(number);	
 		if (m_boardVO.getU_id().equals(Session.LoginUser.getU_id())
 				|| Session.LoginUser.getU_id().equals("admin")) {
 			m_boardDao.deleteM_Board(number);

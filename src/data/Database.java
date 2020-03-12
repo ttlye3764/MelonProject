@@ -53,24 +53,7 @@ public class Database {
 	
 	
 	
-	{
-		M_BoardVO m_board = new M_BoardVO();
-		m_board.setM_b_name("확인용");
-		m_board.setM_b_content("내용");
-		m_board.setM_b_date("2020-03-09");
-		m_board.setU_id("확인용");
-		m_board.setM_b_number(1);
-		m_board.setM_number(1); //입력값을 받아서 입력값에 해당하는 노래게시판 번호
-		tb_m_board.add(m_board);
-		
-		O_BoardVO o_board = new O_BoardVO();
-		o_board.setO_b_name("이재호");
-		o_board.setAd_name("admin");
-		o_board.setO_b_content("아아아아ㅏ");
-		o_board.setO_b_number(1);
-		o_board.setO_b_date("현재날짜");
-		tb_o_board.add(o_board);
-		
+	{		
 		UserVO user = new UserVO();
 		user.setU_id("admin");
 		user.setU_pw("1111");

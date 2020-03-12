@@ -51,7 +51,7 @@ public class M_BoardDao {
 		for(int i = 0 ; i<database.tb_m_board.size();i++){
 			if(database.tb_m_board.get(i).getM_b_number() == number){
 				m_boardvo = database.tb_m_board.get(i);
-				
+				break;
 			}else{
 				m_boardvo = null;
 			}

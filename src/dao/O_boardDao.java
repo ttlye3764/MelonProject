@@ -46,6 +46,7 @@ public class O_boardDao {
 			if(check) {
 				System.out.println("공지사항이 등록되었습니다.");
 				database.tb_o_board.add(board);
+				break;
 			}
 			
 		}
