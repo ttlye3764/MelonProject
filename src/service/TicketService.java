@@ -8,6 +8,7 @@ import vo.MusicVO;
 import vo.TicketVO;
 import vo.UserVO;
 import dao.MusicDao;
+
 import dao.TicketDao;
 import data.Database;
 import data.Session;
@@ -38,8 +39,7 @@ public class TicketService {
 		Database database = Database.getInstance();
 
 		ticketVO.setU_Id(Session.LoginUser.getU_id());
-		ticketVO.setTicket_M_Amount(2);
-		ticketVO.setTicket_Price(10000);
+		ticketVO.setTicket_M_Amount(20);
 		ticketVO.setTicket_Buy_Date(format.format(time));
 		
 		ticketDao.insertTicket(ticketVO);
@@ -60,7 +60,7 @@ public class TicketService {
 
 	// 해당 유저가 산 티켓 조회
 
-	public void userBuyTicket(String name) {
+	public int userBuyTicket(String name) {
 		ArrayList<TicketVO> ticketList = ticketDao.ticketList();
 		int buyTicket = 0;
 		int totalBuyTicket = 0;
@@ -70,10 +70,10 @@ public class TicketService {
 				buyTicket++;
 			}
 		}
-		System.out.println(buyTicket);
+		return buyTicket;
 	}
    // 유저가 보유중인 곡 들을 수 있는 수량
-	public void userTicketAmount(String name) {
+	public int userTicketAmount(String name) {
 		ArrayList<TicketVO> ticketList = ticketDao.ticketList();
 		
 		int ticketAmount = 0;
@@ -82,19 +82,20 @@ public class TicketService {
 				ticketAmount += ticketList.get(i).getTicket_M_Amount();
 			}
 		}
-		System.out.println(ticketAmount);
+		return ticketAmount;
 	}
 	
-	public void userTicketDate(String name) {
+	public String userTicketDate(String name) {
 		ArrayList<TicketVO> ticketList = ticketDao.ticketList();
 		
 		String ticketDate = "";
 		for (int i = 0; i < ticketList.size(); i++) {
 			if (ticketList.get(i).getU_Id().equals(name)) {
-				ticketDate += " " + ticketList.get(i).getTicket_Buy_Date();
+				ticketDate += i+1 + "번째 이용권 결제일 " + ticketList.get(i).getTicket_Buy_Date() + "\n"; 
+				
 			}
 		}
-		System.out.println(ticketDate);
+		return ticketDate;
 	}
 
 	public void listenMusic(UserVO uservo, MusicVO music) {

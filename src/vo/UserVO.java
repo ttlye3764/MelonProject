@@ -5,9 +5,9 @@ public class UserVO {
 	private String u_id;
 	private String u_pw;
 	private String u_name; // 유저 이름
-	private String u_n_name; //유저 닉네임
-	private int u_ticket; // 사용자 티켓
-	
+	private String u_n_name;
+	             
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -61,12 +61,7 @@ public class UserVO {
 	public void setU_n_name(String u_n_name) {
 		this.u_n_name = u_n_name;
 	}
-	public int getU_ticket() {
-		return u_ticket;
-	}
-	public void setU_ticket(int u_ticket) {
-		this.u_ticket = u_ticket;
-	}
+	
 
 
 

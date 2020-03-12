@@ -93,6 +93,7 @@ public class M_BoardService {
 				m_boardvo.setM_b_name(name);
 				m_boardvo.setM_b_content(content);
 				m_boardvo.setM_number(m_Number);
+				m_boardvo.setM_b_number(number);
 
 				m_boardDao.modifyM_board(m_boardvo);
 			}
@@ -124,7 +125,7 @@ public class M_BoardService {
 		ArrayList<M_BoardVO> m_boardList = m_boardDao.boardList();
 
 		System.out.println("-----------------------------------");
-		System.out.println("번호\t제목\t내용\t이름\t날짜\t추천 노래번호\t제목\t가수");
+		System.out.println("번호\t제목\t내용\t글쓴이\t날짜\t추천 노래번호\t제목\t가수");
 		System.out.println("-----------------------------------");
 
 		for (int i = 0; i < m_boardList.size(); i++) {
@@ -135,8 +136,6 @@ public class M_BoardService {
 					+ m_boardList.get(i).getM_b_content()
 					+ "\t"
 					+ m_boardList.get(i).getU_id()
-					+ "\t"
-					+ m_boardList.get(i).getM_b_name()
 					+ "\t"
 					+ m_boardList.get(i).getM_b_date()
 					+ "\t"

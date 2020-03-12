@@ -50,11 +50,9 @@ public class MusicService {
 		String genre = s.nextLine();
 		System.out.print("등록 날짜 : ");
 		String date = s.nextLine();
-		System.out.print("들은 횟수 : ");
-		int count = Integer.parseInt(s.nextLine());
 
 		music.setM_composition(composition);
-		music.setM_count(count);
+		music.setM_count(0);
 		music.setM_date(date);
 		music.setM_genre(genre);
 		music.setM_lyrics(lyrics);

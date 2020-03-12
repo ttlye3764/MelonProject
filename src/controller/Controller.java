@@ -76,12 +76,12 @@ System.out.println("                                                            
 			System.out.println("-----------------------------------------------------------------------");
 			System.out.println("국내 최다 4000만곡 보유, No.1 뮤직플랫폼 멜론! 실시간 차트부터 나를 아는 똑똑한 음악추천까지!");
 			System.out.println("-----------------------------------------------------------------------");
-			System.out.println("1.로그인" + "\t" + "2.회원가입" + "\t" + "3.노래 검색"
-					+ "\t" + " 4.차트보기" + "\t" + "5.노래추천 게시판" + "\n" + "6.공지사항" + "0.종료");
+			System.out.println("1.로그인         2.회원가입               3.노래 검색");
+			System.out.println("4.차트보기      5.노래추천 게시판     6.공지사항         ");
+			System.out.println("0.종료");
 			System.out.println("-----------------------------------------------------------------------");
 			System.out.print("메뉴에 해당하는 번호를 입력해주세요. >");
 			menu = Integer.parseInt(s.nextLine());
-
 			switch (menu) {
 			case 1: // 로그인
 				userService.login();
@@ -103,16 +103,13 @@ System.out.println("                                                            
 				// 차트 보기
 				userController.chart();
 				break;
-
 			case 5: // 노래추천 게시판
 				m_board();
 				break;
-
 			case 6:
 				// 공지사항 메소드
 				o_board();
 				break;
-
 			case 0: // 프로그램 종료
 				System.out.println("프로그램 종료");
 				break;
@@ -125,12 +122,13 @@ System.out.println("                                                            
 	void o_board() {
 		Scanner scan = new Scanner(System.in);
 		O_boardService o_boardService = O_boardService.getInstance();
-		
+
 		AdminController adminController = AdminController.getInstance();
 		UserController userController = UserController.getInstance();
 		int menu;
-		do {
+		do {System.out.println("----------------------------------");
 			System.out.println("1. 공지사항 보기  2.이전 메뉴로 가기   0.프로그램 종료");
+			System.out.println("----------------------------------");
 			menu = Integer.parseInt(scan.nextLine());
 
 			switch (menu) {
@@ -139,14 +137,14 @@ System.out.println("                                                            
 				o_boardService.o_boardList();
 				break;
 			case 2:
-				if(Session.LoginUser == null){
-					start();	
-				}else if(Session.LoginUser.getU_id().equals("admin")){
+				if (Session.LoginUser == null) {
+					start();
+				} else if (Session.LoginUser.getU_id().equals("admin")) {
 					adminController.adminLoginMenu();
-				}else{
+				} else {
 					userController.userLoginMenu();
 				}
-				
+
 				break;
 			}
 		} while (menu != 0);
@@ -157,8 +155,9 @@ System.out.println("                                                            
 		M_BoardService m_boardService = M_BoardService.getInstance();
 		UserController usercontroller = UserController.getInstance();
 		int menu;
-		do {
+		do {System.out.println("--------------------------------------");
 			System.out.println("1. 노래추천 게시판 보기  2.이전 메뉴로 가기   0.프로그램 종료");
+			System.out.println("--------------------------------------");
 			menu = Integer.parseInt(scan.nextLine());
 
 			switch (menu) {
@@ -176,35 +175,6 @@ System.out.println("                                                            
 		} while (menu != 0);
 	}
 
-	/*
-	 * // 노래 리스트 기능 private void start1() { MusicService musicService =
-	 * MusicService.getInstance(); Scanner s = new Scanner(System.in);
-	 * 
-	 * int menu; do { System.out.println("------------메뉴---------------");
-	 * System.out.println("0. 로그인"); // 없애고 System.out.println("1. 노래 리스트 보기");
-	 * // 회원,비회원, 관리자 System.out.println("2. 노래 검색"); // 회원, 비회원, 관리자
-	 * System.out.println("3. 노래 추가"); // 관리자 System.out.println("4. 노래 삭제"); //
-	 * 관리자 System.out.println("5. 최근 들은 플레이리스트 보기"); // 회원
-	 * System.out.println("6. 플레이리스트 보기"); //회원
-	 * System.out.println("9. 프로그램 종료");
-	 * System.out.println("------------------------------");
-	 * System.out.print("메뉴에 해당하는 번호 입력 >");
-	 * 
-	 * menu = Integer.parseInt(s.nextLine());
-	 * 
-	 * switch (menu) {
-	 * 
-	 * case 0:
-	 * 
-	 * break; case 1: musicService.MusicList(); // 저장된 음악 리스트 보기ㅣ break; case 2:
-	 * musicService.searchMusic(); // 노래검색 break; case 3:
-	 * musicService.InsertMusic(); // 노래추가 break; case 4:
-	 * musicService.deleteMusic(); // 노래삭제 break; case 5:
-	 * musicService.Show_R_musicList(); // 최근 들은 노래 리스트 확인 break; case 6:
-	 * musicService.Show_MusicList(); // 플레이리스트 확인 break; } } while (menu != 9);
-	 * 
-	 * }
-	 */
 }
 
-// 컨트롤러 클래스에 로그인 / 비로그인 / 관리자 모드 화면 출력 메소드 만들어서 main문에는 메소드 호출하는 형식으로 하자
+

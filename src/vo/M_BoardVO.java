@@ -10,7 +10,7 @@ public class M_BoardVO {
 	
 	private String m_b_content; // 게시글 내용
 	
-	private int m_b_number;     //게시글 번호
+	private int m_b_number=1;     //게시글 번호
 	
 	private String m_b_date;    //게시글 작성 일자
 	

@@ -41,13 +41,8 @@ public class M_BoardDao {
 	            System.out.println("삭제가 완료되었습니다.");
 	         }
 	}
-   
-   
    public M_BoardVO selectM_borad(int number) {
-		  
 		 M_BoardVO m_boardvo = new M_BoardVO();
-		
-		
 		for(int i = 0 ; i<database.tb_m_board.size();i++){
 			if(database.tb_m_board.get(i).getM_b_number() == number){
 				m_boardvo = database.tb_m_board.get(i);
@@ -58,13 +53,15 @@ public class M_BoardDao {
 		}
 		return m_boardvo;
 	}
+
    
 
    public void modifyM_board(M_BoardVO param) {
 	   
 	   for(int i = 0; i<database.tb_m_board.size();i++) {
 			if(param.getM_b_number()==database.tb_m_board.get(i).getM_b_number()) {
-				database.tb_m_board.set(database.tb_m_board.get(i).getM_b_number()-1, param);
+				database.tb_m_board.set(i , param);
+				break;
 			}
 		}
 		

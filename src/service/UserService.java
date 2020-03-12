@@ -37,9 +37,13 @@ public class UserService {
 	public void join() {
 		Scanner scan = new Scanner(System.in);
 		UserVO user = new UserVO();
-		System.out.println("아이디 : 영어와 숫자 입력이 가능합니다. 4자리 이상 12자리 이내로 작성해주세요.");
-		System.out.print("아이디 : ");
+		System.out.println("<<< JOIN MENU >>>");
+		System.out.println("--------------");
+		System.out.println("아이디 : 영어와 숫자 입력이 가능합니다.");
+		System.out.println("4자리 이상 12자리 이내로 작성해주세요.");
+		System.out.print("아이디를 입력해주세요: ");
 		String u_id = scan.nextLine();
+		
 		String id = "[a-z0-9]{4,12}";
 		Pattern p1 = Pattern.compile(id);
 		Matcher m1 = p1.matcher(u_id);
@@ -47,12 +51,15 @@ public class UserService {
 		if(idCheck){
 			user.setU_id(u_id);
 		}else{
-			System.out.println("글자 제한 수의 범위 이내로 작성해주세요.");
+			System.out.println("위의 사항을 만족하지 못하였습니다. 다시 입력해주세요");
 			join();
 			return;
 		}
-		System.out.println("비밀번호 : 영어,숫자 입력이 가능합니다. 6자리 이상 11자리 이내로 작성해주세요.");
-		System.out.print("비밀번호 : ");
+		System.out.println("--------------");
+		System.out.println("비밀번호 : 영어,숫자 입력이 가능합니다.");
+		System.out.println("6자리 이상 11자리 이내로 작성해주세요.");
+		System.out.print("비밀번호를 입력해주세요 : ");
+		
 		String u_pw = scan.nextLine();
 		String pw = "\\w{6,11}";
 		Pattern p2 = Pattern.compile(pw);
@@ -61,24 +68,27 @@ public class UserService {
 		if(pwCheck){
 			user.setU_pw(u_pw);
 		}else{
-			System.out.println("글자 제한 수의 범위 이내로 작성해주세요.");
+			System.out.println("위의 사항을 만족하지 못하였습니다. 다시 입력해주세요");
 			join();
 			return;
 		}
-		System.out.println("이름 : 한글만 입력 가능합니다. 2자리 이상 4자리 이내로 작성해주세요.");
+		System.out.println("이름 : 한글만 입력 가능합니다.");
+		System.out.println("2자리 이상 4자리 이내로 작성해주세요.");
 		System.out.print("이름 : ");
 		String u_name = scan.nextLine();
 		String name = "[가-힣]{2,4}";
 		Pattern p3 = Pattern.compile(name);
 		Matcher m3 = p3.matcher(u_name);
 		boolean nm_Check = m3.matches();
+		
 		if(nm_Check){
 			user.setU_name(u_name);
 		}else{
-			System.out.println("글자 제한 수의 범위 이내로 작성해주세요.");
+			System.out.println("위의 사항을 만족하지 못하였습니다. 다시 입력해주세요");
 			join();
 			return;
 		}
+		
 		System.out.println("닉네임 : 한글,영어,숫자  입력이 가능합니다. 2자리 이상 8자리 이내로 작성해주세요.");
 		System.out.print("닉네임 : ");
 		String u_n_name = scan.nextLine();
@@ -89,7 +99,7 @@ public class UserService {
 		if(u_nmCheck){
 			user.setU_n_name(u_n_name);
 		}else{
-			System.out.println("글자 제한 수의 범위 이내로 작성해주세요.");
+			System.out.println("위의 사항을 만족하지 못하였습니다. 다시 입력해주세요");
 			join();
 			return;
 		}
@@ -99,9 +109,15 @@ public class UserService {
 	// 로그인
 	public void login() {
 		Scanner scan = new Scanner(System.in);
-		System.out.print("아이디 : ");
+		
+		System.out.println("<<< LOGIN MENU >>>");
+		
+		System.out.println("--------------");
+		System.out.print("아이디를 입력해주세요: ");
 		String id = scan.nextLine();
-		System.out.print("비밀번호: ");
+				
+		System.out.println("--------------");
+		System.out.print("비밀번호를 입력해주세요 : ");
 		String password = scan.nextLine();
 
 		HashMap<String, String> param = new HashMap<>();
@@ -111,9 +127,11 @@ public class UserService {
 		UserVO user = userDao.selectUser(param);
 
 		if (user == null) {
+			System.out.println("--------------------------");
 			System.out.println("아이디 혹은 비밀번호를 잘못 입력하셨습니다.");
 
 		} else {
+			System.out.println("--------------------------");
 			System.out.println("로그인 성공");
 			System.out.println(user.getU_name() + "님 환영합니다.");
 			Session.LoginUser = user;
@@ -121,7 +139,7 @@ public class UserService {
 	}
 	
 
-	// 회원 삭제 03.09 코딩 (코드가 돌아가나, 삭제했을 때 초기 화면으로 안돌아감)
+	// 
 	public void userDelete() {
 		Scanner s = new Scanner(System.in);
 		System.out.println("회원 탈퇴를 위한 정보를 입력해주세요.");

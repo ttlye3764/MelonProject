@@ -32,7 +32,8 @@ public class AdminController {
 			System.out.println("-----------------------------------------------------------------------");
 			System.out.println("국내 최다 4000만곡 보유, No.1 뮤직플랫폼 멜론! 실시간 차트부터 나를 아는 똑똑한 음악추천까지!");
 			System.out.println("-----------------------------------------------------------------------");
-			System.out.println("1.회원 관리		2.음원 관리		3.노래 추천 게시판 관리	 4. 공지사항 게시판 관리     5.로그아웃        0.프로그램 종료");
+			System.out.println("1.회원 관리                     2.음원 관리       3.노래 추천 게시판 관리");
+			System.out.println("4.공지사항 게시판 관리     5.로그아웃        0.프로그램 종료");
 			System.out.println("-----------------------------------------------------------------------");
 			System.out.print("메뉴에 해당하는 번호를 입력해주세요. >");
 			menu = Integer.parseInt(scan.nextLine());
@@ -72,8 +73,9 @@ public class AdminController {
 //		UserService userService = UserService.getInstance();
 		AdminService adminService = AdminService.getInstance();
 		int menu;
-		do {
+		do {System.out.println("---------------------------------------------");
 			System.out.println("1. 회원 목록 조회    2. 회원 삭제  3.이전 메뉴로 가기    4.프로그램 종료");
+			System.out.println("---------------------------------------------");
 			menu = Integer.parseInt(scan.nextLine());
 			switch (menu) {
 			case 1:
@@ -99,8 +101,9 @@ public class AdminController {
 		UserController userController = UserController.getInstance();
 		Scanner scan = new Scanner(System.in);
 		int menu;
-		do {
-			System.out.println("1. 음원 검색   2. 음원 보기  3. 음원 등록  4. 음원 삭제  5.이전 메뉴로 가기   0.프로그램 종료");
+		do {System.out.println("----------------------------");
+			System.out.println("1. 음원 검색   2. 음원 보기          3.음원 등록");
+			System.out.println("4. 음원 삭제   5.이전 메뉴로 가기   0.프로그램 종료");
 			menu = Integer.parseInt(scan.nextLine());
 			switch (menu) {
 			case 1:
@@ -133,8 +136,10 @@ public class AdminController {
 		Scanner scan = new Scanner(System.in);
 		O_boardService o_boardService = O_boardService.getInstance();
 		int menu;
-		do {
-			System.out.println("1. 공지사항 보기  2. 공지사항 등록  3. 공지사항 수정  4. 공지사항 삭제 5.이전 메뉴로 가기   0.프로그램 종료");
+		do {System.out.println("----------------------------------");
+			System.out.println("1. 공지사항 보기     2. 공지사항 등록     3. 공지사항 수정");
+			System.out.println("4. 공지사항 삭제     5.이전 메뉴로 가기    0.프로그램 종료");
+			System.out.println("----------------------------------");
 			menu = Integer.parseInt(scan.nextLine());
 
 			switch (menu) {
@@ -170,8 +175,9 @@ public class AdminController {
 		M_BoardService m_boardService = M_BoardService.getInstance();
 		UserController usercontroller = UserController.getInstance();
 		int menu;
-		do {
+		do {System.out.println("----------------------------------------");
 			System.out.println("1.게시판 보기 2.게시판 삭제  3.이전 메뉴로 가기   0.프로그램 종료");
+			System.out.println("----------------------------------------");
 			menu = Integer.parseInt(scan.nextLine());
 
 			switch (menu) {

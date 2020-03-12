@@ -22,12 +22,7 @@ public class TicketVO {
 	public void setTicket_M_Amount(int ticket_M_Amount) {
 		this.ticket_M_Amount = ticket_M_Amount;
 	}
-	public int getTicket_Price() {
-		return ticket_Price;
-	}
-	public void setTicket_Price(int ticket_Price) {
-		this.ticket_Price = ticket_Price;
-	}
+	
 	public String getU_Id() {
 		return u_Id;
 	}
