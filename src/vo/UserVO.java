@@ -5,8 +5,8 @@ public class UserVO {
 	private String u_id;
 	private String u_pw;
 	private String u_name; // 유저 이름
-	private String u_n_name;
-	private int u_ticket; // 티켓1,티켓2             
+	private String u_n_name; //유저 닉네임
+	private int u_ticket; // 사용자 티켓
 	
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -26,6 +26,10 @@ public class UserVO {
 				return false;
 		} else if (!u_name.equals(other.u_name))
 			return false;
+		if (u_n_name == null) {
+			if (other.u_n_name != null)
+				return false;
+		} else if (!u_n_name.equals(other.u_n_name))
 		if (u_pw == null) {
 			if (other.u_pw != null)
 				return false;

@@ -31,7 +31,7 @@ public class TicketService {
 	Database database = Database.getInstance();
 
 	public void buyTicket() {
-		SimpleDateFormat format = new SimpleDateFormat("MM월DD일 hh시mm분");
+		SimpleDateFormat format = new SimpleDateFormat("MM월dd일 hh시mm분");
 		Date time = new Date();
 		
 		TicketVO ticketVO = new TicketVO();

@@ -75,6 +75,7 @@ public class Database {
 		user.setU_id("admin");
 		user.setU_pw("1111");
 		user.setU_name("관리자");
+		user.setU_n_name("이재호");
 		tb_user.add(user);
 		
 		//노래 넣는부분//

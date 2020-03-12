@@ -39,7 +39,7 @@ public class UserDao {
 	public UserVO selectUser(HashMap<String, String> param) {
 			UserVO rtnUser = null;
 			for (int i = 0; i < database.tb_user.size(); i++) {
-				UserVO user = database .tb_user.get(i);
+				UserVO user = database.tb_user.get(i);
 				boolean flag  = true;
 				for(String key : param.keySet()){
 					String value = param.get(key);
@@ -49,6 +49,8 @@ public class UserDao {
 						if(!user.getU_pw().equals(value)) flag = false;
 					}else if(key.equals("NAME")){
 						if(!user.getU_name().equals(value)) flag = false;
+					}else if(key.equals("UNAME")){
+						if(!user.getU_n_name().equals(value)) flag = false;
 					}
 				}
 				 if(flag) rtnUser = user;
@@ -58,7 +60,6 @@ public class UserDao {
 
 	
 	public ArrayList<UserVO> selectUserList() {
-		
 		return database.tb_user;
 	}
 	

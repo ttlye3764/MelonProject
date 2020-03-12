@@ -7,6 +7,7 @@ import service.MusicService;
 import service.TicketService;
 import service.UserService;
 import vo.UserVO;
+import data.Database;
 import data.Session;
 
 public class UserController {
@@ -27,19 +28,16 @@ public class UserController {
 	public void userLoginMenu() {
 		MusicService musicService = MusicService.getInstance();
 		Controller controller = Controller.getInstance();
+		Database database = Database.getInstance();
 		Scanner scan = new Scanner(System.in);
 		int menu;
-		do {
-			System.out
-					.println("-----------------------------------------------------------------------");
-			System.out
-					.println("국내 최다 4000만곡 보유, No.1 뮤직플랫폼 멜론! 실시간 차트부터 나를 아는 똑똑한 음악추천까지!");
-			System.out
-					.println("-----------------------------------------------------------------------");
-			System.out
-					.println("1. 노래검색		2. 차트보기		3. 플레이리스트		4.내 정보		5.노래추천 게시판		6. 공지사항	7.로그아웃		0.프로그램 종료");
-			System.out
-					.println("-----------------------------------------------------------------------");
+		do {System.out.println(database.tb_user.get(1).getU_n_name());
+			System.out.println("-----------------------------------------------------------------------");
+			System.out.println("국내 최다 4000만곡 보유, No.1 뮤직플랫폼 멜론! 실시간 차트부터 나를 아는 똑똑한 음악추천까지!");
+			System.out.println("-----------------------------------------------------------------------");
+			System.out.println("1. 노래검색		2. 차트보기		3. 플레이리스트		4.내 정보		5.노래추천 게시판"
+					+ "\n" + "6. 공지사항		7.로그아웃		0.프로그램 종료");
+			System.out.println("-----------------------------------------------------------------------");
 			System.out.print("메뉴에 해당하는 번호를 입력해주세요. >");
 			menu = Integer.parseInt(scan.nextLine());
 			switch (menu) {
@@ -207,10 +205,7 @@ public class UserController {
 		
 		do {
 			System.out.println("--------------내 정보-----------------");
-			System.out.println(" 내 아이디 : " + user.getU_id()); // 세션에 있는 아이디를 가지고
-																// 온다.
-			System.out.println(" 내 닉네임 : " + user.getU_n_name()); // 세션에 있는 닉네임을 가져온다.
-			
+			System.out.println(" 내 아이디 : " + user.getU_id() + "\t" + " 내 닉네임 : " + user.getU_n_name()); 
 			System.out.println(" 총 구매한 이용권 수 : ");
 			ticketService.userBuyTicket(user.getU_id());
 			
