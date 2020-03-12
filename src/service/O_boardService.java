@@ -33,17 +33,17 @@ public class O_boardService {
 		System.out.println("---------------------------");
 		System.out.println("번호 |  제목  | 내용  |  등록자   |  등록일");
 		for (int i = 0; i < o_boardList.size(); i++) {
-			O_BoardVO o_board = o_boardList.get(i);
+		
 			System.out.println(
-					o_board.getO_b_number()
+					o_boardList.get(i).getO_b_number()
 					+ "\t"
-					+ o_board.getO_b_name()
+					+ 	o_boardList.get(i).getO_b_name()
 					+ "\t"
-					+ o_board.getO_b_content()
+					+ 	o_boardList.get(i).getO_b_content()
 					+ "\t"
-					+ o_board.getAd_name()
+					+ 	o_boardList.get(i).getAd_name()
 					+ "\t"
-					+ o_board.getO_b_date()
+					+ 	o_boardList.get(i).getO_b_date()
 					+ "\t");
 		}
 
