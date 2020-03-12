@@ -110,7 +110,7 @@ public class MusicService {
 				int check = Integer.parseInt(s.nextLine());
 				switch (check) {
 				case 1:				
-					ticketservice.listenPlaylist(uservo,music);
+					ticketservice.listenMusic(uservo,music);
 					break;
 				case 2:
 					musicDao.insert_playList(music); // 사용자 플레이리스트에 음악 insert 부분
@@ -177,25 +177,42 @@ public class MusicService {
 	}
 
 	public void Show_MusicList() { // 사용자 플레이 리스트 보기
-
+		Scanner scan = new Scanner(System.in);
 		ArrayList<MusicVO> musicList = musicDao.MusicList();
 		ArrayList<PlayListVO> playlist = musicDao.PlayList(); // m_number 노래등록번호
-		ArrayList<MusicVO> list = new ArrayList<>();
 		UserVO uservo = Session.LoginUser;
+		ArrayList<MusicVO> list = new ArrayList<>();
 		System.out.println("플레이 리스트");
 
 		for (int i = 0; i < playlist.size(); i++) {
 			if (playlist.get(i).getU_id().equals(uservo.getU_id())) {
 				for (int j = 0; j < musicList.size(); j++) {
-					if (musicList.get(j).getM_number() == playlist.get(i)
-							.getM_number()) {
+					if (musicList.get(j).getM_number() == playlist.get(i).getM_number()) {
 						System.out.println(musicList.get(j).getM_number()
 								+ "\t" + musicList.get(j).getM_name() + "\t"
 								+ musicList.get(j).getM_singer());
+						list.add(musicList.get(j));
 					}
 				}
 			}
 		}
+		System.out.println("1. 듣기   \t  2. 곡 삭제   \t 3. 이전 메뉴");
+		int a = Integer.parseInt(scan.nextLine());
+		
+		switch(a){
+		case 1:
+			musicDao.listenPlayList(uservo,list);
+			break;
+		case 2:
+			musicDao.deletePlayListMusic(uservo);
+			break;
+		case 3:
+			break;
+		}	
+		
+		
+		
+		
 	}
 
 	public void Genre_MusicChart() { // 장르별 차트 보기

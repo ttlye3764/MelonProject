@@ -2,12 +2,14 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 import data.Database;
 import data.Session;
 import service.MusicService;
 import vo.MusicVO;
 import vo.R_playListVO;
+import vo.TicketVO;
 import vo.UserVO;
 import vo.PlayListVO;
 public class MusicDao {
@@ -25,7 +27,7 @@ public class MusicDao {
 	}
 
 	Database database = Database.getInstance();
-
+	TicketDao ticketDao = TicketDao.getInstance();
 	public void insertMusic(MusicVO music) { //노래 추가
 		boolean check = true;
 		for (int i = 0; i < database.tb_music.size(); i++) {
@@ -129,7 +131,8 @@ public class MusicDao {
 		
 		
 		for (int i = 0; i < database.tb_playlist.size(); i++) {
-			if ((database.tb_playlist.get(i).getM_number() == music.getM_number())){				
+			if ((database.tb_playlist.get(i).getM_number() == music.getM_number() 
+					&& database.tb_playlist.get(i).getU_id() == uservo.getU_id())){				
 				System.out.println("이미 추가된 노래입니다.");
 				check = false;
 				break;
@@ -153,5 +156,79 @@ public class MusicDao {
 		}
 	}
 
+	public void listenPlayList(UserVO uservo, ArrayList<MusicVO> list) {
+		ArrayList<TicketVO> ticketList = ticketDao.ticketList();	
+		MusicVO musicvo = new MusicVO();
+		int listsize = list.size();
+		int count = 0;
+		boolean check = true;
+		
+		for (int i = 0; i < list.size(); i++) {
+			musicvo = list.get(i);
+			this.CountPlus(musicvo);
+		}
+		
+		A: for (int i = 0; i < ticketList.size(); i++) {
+			if(ticketList.get(i).getU_Id().equals(uservo.getU_id())){
+				if(ticketList.get(i).getTicket_M_Amount()<1){
+					continue;
+				}
+				else{
+					for (int j = 0; j < listsize; j++) {
+						if(ticketList.get(i).getTicket_M_Amount()<1){
+							listsize = listsize + count;
+							check = true;
+							continue A; 
+						}
+						else{
+							ticketList.get(i).setTicket_M_Amount(ticketList.get(i).getTicket_M_Amount()-1);					
+							count--;
+							check = false;
+						}
+					}
+				break;
+				}				
+			}				
+		}
+		if(check){
+			System.out.println("이용권이 부족합니다.");
+		}
+		else{
+			System.out.println("듣기 완료");
+		}
+	}
 
+	public void deletePlayListMusic(UserVO uservo) {
+		Scanner scan = new Scanner(System.in);
+		boolean check = true;
+		System.out.println("삭제할 노래 이름을 입력해주세요.");
+		String name = scan.nextLine();
+		System.out.println("노래의 가수 이름을 입력해주세요.");
+		String singer = scan.nextLine();
+		MusicVO music = new MusicVO();		
+		music.setM_name(name);
+		music.setM_singer(singer);
+		
+		music = this.searchMusic(music);
+		if(music == null){
+			System.out.println("삭제할 노래가 없습니다.");
+		}
+		else{
+		
+			for (int i = 0; i < database.tb_playlist.size(); i++) {
+				if(music.getM_number() == database.tb_playlist.get(i).getM_number() && 
+						uservo.getU_id().equals(database.tb_playlist.get(i).getU_id())){
+					database.tb_playlist.remove(i);
+					check = false;
+					break;
+				}			
+			}
+		if(check){
+			System.out.println("삭제할 노래가 없습니다.");				
+		}
+		else{
+			System.out.println("해당 노래를 삭제하였습니다.");
+		}
+		}
+	}
 }

@@ -97,7 +97,7 @@ public class TicketService {
 		System.out.println(ticketDate);
 	}
 
-	public void listenPlaylist(UserVO uservo, MusicVO music) {
+	public void listenMusic(UserVO uservo, MusicVO music) {
 		ArrayList<TicketVO> ticketList = ticketDao.ticketList();	
 		boolean check = true;
 		for (int i = 0; i < ticketList.size(); i++) {
